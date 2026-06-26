@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borja González Arazo · CV</title>
+  <style>
+    :root {
+      --accent: #0e8f9e;
+      --accent-2: #2563eb;
+      --accent-soft: #e6f4f6;
+      --ink: #1f2933;
+      --ink-soft: #5b6b7a;
+      --line: #dbe3ec;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      font-size: 10px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: #b9d2ec;
+    }
+
+    /* ===== HOJA A4 con fondo de agua estático ===== */
+    .page {
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 4mm 9mm;
+      overflow: hidden;
+      background:
+        /* anillos de "ripple" (gota arriba-derecha) */
+        radial-gradient(circle at 86% 5%,
+          transparent 0 22px, rgba(14, 143, 158, .10) 22px 24px,
+          transparent 24px 46px, rgba(14, 143, 158, .07) 46px 48px,
+          transparent 48px 74px, rgba(14, 143, 158, .05) 74px 76px, transparent 76px),
+        /* anillos de "ripple" (gota abajo-izquierda) */
+        radial-gradient(circle at 7% 93%,
+          transparent 0 26px, rgba(37, 99, 235, .08) 26px 28px,
+          transparent 28px 56px, rgba(37, 99, 235, .06) 56px 58px,
+          transparent 58px 90px, rgba(37, 99, 235, .045) 90px 92px, transparent 92px),
+        radial-gradient(1100px 700px at 80% -8%, #cfe0f4 0%, transparent 60%),
+        linear-gradient(180deg, #dcebf8 0%, #b9d2ec 100%);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 14px -8px rgba(20, 50, 70, .25);
+      padding: 10px 16px;
+    }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      flex: none;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-size: 42px;
+      font-weight: 700;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: -.4px;
+    }
+
+    .role {
+      display: inline-block;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 14px;
+      margin: 3px 0 9px;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact li {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      border: 1px solid #d4e9ec;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 10.5px;
+      color: var(--ink);
+    }
+
+    .contact svg {
+      width: 13px;
+      height: 13px;
+      flex: none;
+      color: var(--accent);
+    }
+
+    /* ===== LAYOUT 2 COLUMNAS ===== */
+    .body-grid {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      align-items: flex-start;
+    }
+
+    .side {
+      flex: 0 0 34%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, .93);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 14px -10px rgba(20, 50, 70, .22);
+      padding: 5px 11px;
+    }
+
+    .sec-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      margin: 0 0 5px;
+      letter-spacing: -.2px;
+    }
+
+    .sec-title::before {
+      content: "";
+      width: 8px;
+      height: 18px;
+      border-radius: 3px;
+      flex: none;
+      background: linear-gradient(var(--accent), var(--accent-2));
+    }
+
+    /* ===== EXPERIENCIA ===== */
+    .timeline {
+      position: relative;
+      padding-left: 17px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(var(--accent), transparent);
+    }
+
+    .job {
+      position: relative;
+      margin-bottom: 6.5px;
+    }
+
+    .job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job::before {
+      content: "";
+      position: absolute;
+      left: -17px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2.5px solid var(--accent);
+    }
+
+    .job.minor::before {
+      border-color: var(--ink-soft);
+    }
+
+    .job h3 {
+      margin: 0;
+      font-size: 13.5px;
+    }
+
+    .job .meta {
+      color: var(--ink-soft);
+      font-size: 9px;
+      margin: 1px 0 3px;
+    }
+
+    .job ul {
+      margin: 2px 0 3px;
+      padding-left: 16px;
+    }
+
+    .job li {
+      margin-bottom: 1px;
+      font-size: 9.5px;
+    }
+
+    .job>p {
+      font-size: 9.1px;
+    }
+
+    /* ===== TAGS / PILLS ===== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-size: 8.7px;
+      font-weight: 500;
+      background: var(--accent-soft);
+      color: #0b6b77;
+      border: 1px solid #cfe8eb;
+      border-radius: 999px;
+      padding: 2px 7px;
+    }
+
+    /* ===== SKILLS (en sidebar, apilado) ===== */
+    .skill-group {
+      margin-bottom: 0;
+      padding: 4.3px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .skill-group:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .skill-group:last-child {
+      padding-bottom: 0;
+    }
+
+    .skill-group h4 {
+      margin: 0 0 4px;
+      font-size: 9.8px;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* ===== FORMACIÓN / IDIOMAS / APTITUDES ===== */
+    .edu-item {
+      margin-bottom: 2.5px;
+    }
+
+    .edu-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .edu-item h4 {
+      margin: 0;
+      font-size: 10.5px;
+    }
+
+    .edu-item span {
+      color: var(--ink-soft);
+      font-size:12.5px;
+    }
+
+    .lang {
+      margin-bottom: 10px;
+    }
+
+    .lang .row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.2px;
+      margin-bottom: 4px;
+    }
+
+    .bar {
+      height: 6px;
+      border-radius: 4px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .bar>i {
+      display: block;
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .aptitudes {
+      margin: 0;
+      padding-left: 14px;
+    }
+
+    .aptitudes li {
+      margin-bottom: 2px;
+      font-size: 10px;
+    }
+
+    .presentacion {
+      margin: 0;
+      font-size: 10.5px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ===================== HERO ===================== -->
+     
+    <header class="hero">
+      <div class="avatar">
+        <img src="foto-CV.png" alt="Borja González Arazo">
+      </div>
+      <div>
+        <h1>Borja González Arazo</h1>
+        <span class="role">Desarrollador de Aplicaciones Web Full Stack</span>
+        <ul class="contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>Madrid-Carabanchel, España · Nacionalidad española</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+            </svg><a href="tel:+34692358616">692 35 86 16</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg><a href="mailto:borjagonzalezarazo@hotmail.com">borjagonzalezarazo@hotmail.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z" />
+            </svg><a href="https://www.borjacode.com">borjacode.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg><a href="https://www.linkedin.com/in/borja-gonzalez-arazo/">LinkedIn</a></li>
+
+        </ul>
+      </div>
+    </header>
+
+    <div class="body-grid">
+
+      <!-- ===================== COLUMNA LATERAL ===================== -->
+      <aside class="side">
+
+        <section class="card">
+          <h2 class="sec-title">Habilidades &amp; Tecnologías</h2><br>
+          <div class="skill-group">
+            <h4>Lenguajes</h4>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">PHP</span>
+              <span class="tag">Java</span><span class="tag">Python</span><span class="tag">SQL</span>
+              <span class="tag">HTML</span><span class="tag">CSS</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Frontend</h4>
+            <div class="tags">
+              <span class="tag">Vue 3</span><span class="tag">React</span><span class="tag">Next.js</span>
+              <span class="tag">Vue Router</span><span class="tag">Pinia</span>
+              <span class="tag">Vue I18n</span><span class="tag">Tailwind</span><span class="tag">Bootstrap</span><span
+                class="tag">jQuery</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Backend</h4>
+            <div class="tags">
+              <span class="tag">PHP (OAuth2/OIDC · JWT)</span><span class="tag">Node.js</span><span
+                class="tag">Express</span>
+              <span class="tag">APIs REST</span><span class="tag">PHPMailer</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Animación &amp; Visual</h4>
+            <div class="tags">
+              <span class="tag">GSAP</span><span class="tag">Motion</span><span class="tag">Lenis</span>
+              <span class="tag">Three.js</span><span class="tag">D3.js</span><span class="tag">Chart.js</span><span
+                class="tag">Leaflet</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Aplicaciones Móvil</h4>
+            <div class="tags"><span class="tag">Flutter</span><span class="tag">Android</span><span class="tag">Android
+                Studio</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>Bases de datos</h4>
+            <div class="tags"><span class="tag">MySQL</span><span class="tag">phpMyAdmin</span><span
+                class="tag">SQLite</span><span class="tag">Supabase</span><span class="tag">Firebase</span></div>
+          </div>
+          <div class="skill-group">
+            <h4>DevOps &amp; Infraestructura</h4>
+            <div class="tags">
+              <span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">WireGuard VPN</span>
+              <span class="tag">Git / GitHub</span><span class="tag">Vite</span><span class="tag">FTP / Hostinger</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>IA &amp; Automatización</h4>
+            <div class="tags">
+              <span class="tag">Anthropic/Claude (Design, Cowork, Code, Skills)</span><span
+                class="tag">OpenAI/Codex</span><span class="tag">n8n</span><span class="tag">Telegram Bot API</span>
+              <span class="tag">Notion API</span><span class="tag">Google APIs</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Otros</h4>
+            <div class="tags"><span class="tag">WordPress</span><span class="tag">SEO</span><span
+                class="tag">Computación en la nube</span><span class="tag">Edición de imagen y vídeo (RRSS)</span><span
+                class="tag">IA generativa de contenido</span></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 class="sec-title">Idiomas</h2>
+          <div class="lang">
+            <div class="row"><span>Inglés</span><span>Medio · A2–B1</span></div>
+            <div class="bar"><i style="width:60%"></i></div>
+          </div>
+          <div class="lang">
+            <div class="row"><span>Francés</span><span>Básico · A1</span></div>
+            <div class="bar"><i style="width:30%"></i></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 class="sec-title">Aptitudes</h2>
+          <ul class="aptitudes">
+            <li>Actitud profesional y responsable.</li>
+            <li>Iniciativa y afán de superación.</li>
+            <li>Predisposición al aprendizaje.</li>
+            <li>Perfil versátil y trabajo en equipo.</li>
+            <li>Capacidad para trabajar bajo presión.</li>
+          </ul>
+        </section>
+
+      </aside>
+
+      <!-- ===================== COLUMNA PRINCIPAL ===================== -->
+      <div class="main">
+
+        <!-- ===================== PRESENTACION ===================== -->
+        <section class="card">
+          <h2 class="sec-title">Presentación</h2>
+          <p class="presentacion">
+            Desarrollador de Aplicaciones Web <strong>Full Stack</strong> con formación en Desarrollo de Aplicaciones
+            Web y experiencia real construyendo productos de principio a fin. He trabajado en diversos proyectos que
+            destacan por su calidad y creatividad, con la satisfacción de todos los clientes. Busco la oportunidad de
+            integrarme a una empresa donde pueda demostrar mis habilidades, contribuir al éxito y llegar a ser parte
+            imprescindible del equipo. Me apasiona crear interfaces cuidadas y rápidas, y me mantengo en aprendizaje y
+            evolución constante.
+          </p>
+        </section>
+
+        <!-- ===================== CEXPERIENCIA LABORAL ===================== -->
+        <section class="card">
+          <h2 class="sec-title">Experiencia laboral</h2>
+          <div class="timeline">
+
+            <article class="job">
+              <h3>Desarrollador Web Full Stack <span style="color:var(--accent)">· Reglado Consultores</span></h3>
+              <p class="meta">Prácticas · Madrid · 2026</p>
+              <ul>
+                <li>Desarrollo de <strong>portales corporativos</strong> (Reglado Consultores, Energy, Maps) con Vue 3, Vue Router y Vite. PHPMailer y PhpMyAdmin.</li>
+                <li><strong>Panel/CRM inmobiliario</strong> con gestión de propiedades, mapas interactivos (Leaflet) y estado con Pinia.</li>
+                <li><strong>Chatbot con IA</strong> integrando el SDK de Anthropic (Claude), backend en Node.js/Express y canales de Telegram y Notion.</li>
+                <li><strong>Visualización de datos y mapas</strong> con D3.js y TopoJSON; animaciones e interacción con GSAP, Motion y Three.js.</li>
+                <li><strong>Servidor de autenticación OAuth2/OIDC</strong> en PHP (JWT, PSR-7) y APIs REST sobre MySQL.</li>
+                <li><strong>Creación y mantenimiento de bases de datos</strong> (MySQL con phpMyAdmin), <em>debugging</em> y <em>testing</em> de las aplicaciones.</li>
+                <li><strong>Automatización</strong> de flujos y procesos con n8n.</li>
+                <li><strong>Despliegues</strong> en Linux, Docker y Hostinger (FTP).</li>
+                <li><strong>Soporte técnico</strong> de hardware y software a los trabajadores de la empresa. Creación de Scripts.</li>
+                <li><strong>Instalación y mantenimiento de infraestructura de red</strong>: router, switch y NAS.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Vue 3</span><span class="tag">React</span><span class="tag">Next.js</span>
+                <span class="tag">PHP</span><span class="tag">Node.js</span><span class="tag">MySQL</span>
+                <span class="tag">Three.js</span><span class="tag">D3.js</span><span class="tag">Docker</span>
+                <span class="tag">IA</span><span class="tag">n8n</span><span class="tag">Linux</span><span
+                  class="tag">GitHub</span>
+              </div>
+            </article>
+
+            <article class="job">
+              <h3>Desarrollador Web &amp; Apps Móviles <span style="color:var(--accent)">· Freelance</span></h3>
+              <p class="meta">Proyectos para clientes · Actualidad</p>
+              <ul>
+                <li>Desarrollo de <strong>multitud de proyectos a medida</strong> para empresas y particulares.</li>
+                <li><strong>Portales web completos</strong>, aplicaciones web y <strong>tiendas online</strong> (e-commerce).</li>
+                <li><strong>Juegos interactivos</strong> para campañas de marketing y marcas personales.</li>
+                <li><strong>Aplicaciones móviles</strong> con Flutter, Android y Android Studio: <strong>fichaje</strong> (control horario) y <strong>citas</strong>.</li>
+                <li><strong>Bots de respuesta automática en WhatsApp</strong>.</li>
+                <li>Empaquetado de aplicaciones en <strong>APK</strong> y publicación en <strong>Google Play</strong> y <strong>App Store</strong> (iOS).</li>
+                <li>Gestión integral del proyecto: diseño, desarrollo, despliegue y mantenimiento.</li>
+                <li>Creación, edición y automatización de contenido con imágenes y vídeos para RRSS.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Flutter</span><span class="tag">Android</span><span class="tag">Android Studio</span>
+                <span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">WordPress</span>
+                <span class="tag">E-commerce</span><span class="tag">WhatsApp API</span>
+              </div>
+            </article>
+
+            <article class="job minor">
+              <h3>Vigilante de seguridad <span style="color:var(--ink-soft)">· Comunidad de Madrid</span></h3>
+              <p class="meta">2018 – 2026</p>
+              <p style="margin:0;color:var(--ink-soft);">Control de accesos, vigilancia y custodia de activos, atención
+                al público y resolución de incidencias.</p>
+            </article>
+
+            <article class="job minor">
+              <h3>Administrador de empresa <span style="color:var(--ink-soft)">· Mecánicas Trébol S.L.</span></h3>
+              <p class="meta">Gestión y administración</p>
+              <p style="margin:0;color:var(--ink-soft);">Planificación, administración y contabilidad, atención al
+                cliente, presupuestos y control de empleados.</p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ===================== FORMACION ===================== -->
+        <section class="card">
+          <h2 class="sec-title">Formación</h2>
+          <div class="edu-item">
+            <h4>Técnico Superior en Desarrollo de Aplicaciones Web</h4>
+            <span>IES Virgen de la Paz · 2025</span>
+          </div>
+          <div class="edu-item">
+            <h4>Bachillerato (Ciencias y Tecnología)</h4>
+            <span>IES Calderón de la Barca · 2020</span>
+          </div>
+          <div class="edu-item">
+            <h4>Curso de Inteligencia Artificial</h4>
+            <span>Udemy</span>
+          </div>
+          <div class="edu-item">
+            <h4>WordPress</h4>
+            <span>Cursos Femxa</span>
+          </div>
+        
+        </section>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
