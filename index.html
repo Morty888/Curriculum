@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CV de Borja González Arazo — Desarrollador Web Full Stack" />
+  <title>Borja González Arazo · Desarrollador Web Full Stack</title>
+  <style>
+    :root {
+      --accent: #0e8f9e;
+      /* teal */
+      --accent-2: #2563eb;
+      /* azul */
+      --accent-soft: #e6f4f6;
+      --ink: #1f2933;
+      /* texto principal */
+      --ink-soft: #5b6b7a;
+      /* texto secundario */
+      --line: #e6ebf0;
+      --card: #ffffff;
+      --bg: #c4d7ee;
+      --radius: 16px;
+      --shadow: 0 10px 30px -12px rgba(20, 50, 70, .18), 0 2px 6px -2px rgba(20, 50, 70, .08);
+      --maxw: 1140px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      /* Fondo estático: también sirve de fallback si no hay WebGL */
+      background:
+        radial-gradient(1100px 600px at 80% -10%, #cfe0f4 0%, transparent 60%),
+        linear-gradient(180deg, #d5e3f5 0%, #b4cdea 100%);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Canvas del efecto agua, detrás de todo */
+    #water {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      display: block;
+      touch-action: none;
+      /* permite capturar gestos sin hacer scroll-jacking del navegador en la propia interacción */
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(16px, 4vw, 40px);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .9));
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 40px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(18px, 3vw, 32px);
+      align-items: center;
+    }
+
+    .avatar {
+      width: clamp(96px, 18vw, 140px);
+      height: clamp(96px, 18vw, 140px);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-size: clamp(34px, 6vw, 52px);
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 24px -8px rgba(14, 143, 158, .6);
+      overflow: hidden;
+      flex: none;
+    }
+
+    /* Para usar una foto real: añade <img src="..."> dentro de .avatar y se mostrará en lugar de las iniciales */
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      margin: 0 0 4px;
+      font-size: clamp(26px, 5.2vw, 42px);
+      line-height: 1.1;
+      letter-spacing: -.5px;
+    }
+
+    .role {
+      display: inline-block;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: clamp(15px, 2.6vw, 19px);
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      color: var(--ink-soft);
+      margin: 0 0 16px;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact li {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-soft);
+      color: var(--ink);
+      border: 1px solid #d4e9ec;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .contact svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+      color: var(--accent);
+    }
+
+    /* salto de línea forzado dentro del flex de contacto */
+    .contact .break {
+      flex-basis: 100%;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+
+    /* ===== SECCIONES ===== */
+    section {
+      margin-top: clamp(22px, 4vw, 36px);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3.4vw, 30px);
+    }
+
+    .sec-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(17px, 3vw, 22px);
+      margin: 0 0 18px;
+      letter-spacing: -.2px;
+    }
+
+    .sec-title::before {
+      content: "";
+      width: 9px;
+      height: 22px;
+      border-radius: 4px;
+      background: linear-gradient(var(--accent), var(--accent-2));
+      flex: none;
+    }
+
+    /* ===== TIMELINE EXPERIENCIA ===== */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(var(--accent), transparent);
+    }
+
+    .job {
+      position: relative;
+      padding-bottom: 22px;
+    }
+
+    .job:last-child {
+      padding-bottom: 0;
+    }
+
+    .job::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--accent);
+    }
+
+    .job.minor::before {
+      border-color: var(--ink-soft);
+    }
+
+    .job h3 {
+      margin: 0;
+      font-size: 18.5px;
+    }
+
+    .job .meta {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      margin: 2px 0 8px;
+    }
+
+    .job ul {
+      margin: 8px 0 10px;
+      padding-left: 18px;
+    }
+
+    .job li {
+      margin-bottom: 4px;
+    }
+
+    /* ===== TAGS / PILLS ===== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 12.5px;
+      font-weight: 500;
+      background: var(--accent-soft);
+      color: #0b6b77;
+      border: 1px solid #cfe8eb;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ===== GRID PROYECTOS ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .project {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .project h4 {
+      margin: 0 0 4px;
+      font-size: 15.5px;
+    }
+
+    .project p {
+      margin: 0 0 10px;
+      color: var(--ink-soft);
+      font-size: 13.5px;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width:820px) {
+      .skills {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .skill-group {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .skill-group:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-group h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    /* ===== DOS COLUMNAS (formación / idiomas / aptitudes) ===== */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(16px, 3vw, 24px);
+    }
+
+    .edu-item {
+      margin-bottom: 14px;
+    }
+
+    .edu-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .edu-item h4 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .edu-item span {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+    }
+
+    .lang {
+      margin-bottom: 12px;
+    }
+
+    .lang .row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .bar {
+      height: 7px;
+      border-radius: 6px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .bar>i {
+      display: block;
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .aptitudes {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .aptitudes li {
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 13px;
+      margin: 34px 0 12px;
+    }
+
+    /* ===== ANIMACIÓN DE ENTRADA ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+
+      .contact {
+        justify-content: center;
+      }
+
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      .cols {
+        grid-template-columns: 1fr;
+      }
+
+      .role {
+        margin-inline: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ===== IMPRESIÓN (base para futura versión PDF) ===== */
+    @media print {
+      #water {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .card,
+      .hero {
+        box-shadow: none;
+        border-color: #dfe6ec;
+        backdrop-filter: none;
+      }
+
+      .project:hover {
+        transform: none;
+      }
+
+      a {
+        color: var(--ink);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="water" aria-hidden="true"></canvas>
+
+  <main class="wrap">
+
+    <!-- ===================== HERO ===================== -->
+    <header class="hero reveal">
+      <div class="avatar">
+        <img src="foto-CV.png" alt="Borja González Arazo">
+        <!-- BG -->
+      </div>
+      <div>
+        <h1>Borja González Arazo</h1>
+        <span class="role">Desarrollador de Aplicaciones Web Full Stack</span>
+        <p class="tagline">Construyo aplicaciones web completas. De frontend a backend; interfaces modernas con Vue,
+          React y Next.js. APIs y servicios en PHP y Node.js, e integraciones de IA y automatización para empresas y
+          particulares.</p>
+        <ul class="contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>Madrid-Carabanchel, España · Nacionalidad española</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+            </svg><a href="tel:+34692358616">692 35 86 16</a></li>
+          <li class="break" aria-hidden="true"></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg><a href="mailto:borjagonzalezarazo@hotmail.com">borjagonzalezarazo@hotmail.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z" />
+            </svg><a href="https://www.borjacode.com" target="_blank" rel="noopener">borjacode.com</a></li>
+
+        </ul>
+      </div>
+    </header>
+
+    <!-- ===================== PRESENTACIÓN ===================== -->
+    <section class="card reveal">
+      <h2 class="sec-title">Presentación</h2>
+      <p style="margin:0;">
+        Desarrollador de Aplicaciones Web <strong>Full Stack</strong> con formación en Desarrollo de Aplicaciones Web y
+        experiencia real construyendo productos de principio a fin.
+        He trabajado en diversos proyectos que destacan por su calidad y creatividad. Con la satisfacción de todos los
+        clientes...
+        Combino frameworks modernos de frontend (Vue, React, Next.js) con back­end en PHP y Node.js, bases de datos e
+        integraciones de IA y automatización.
+        También actuando en soporte informático y en instalaciones de hadware y software.
+        Me apasiona crear interfaces cuidadas y rápidas, y me mantengo en aprendizaje y evolución constante.
+      </p>
+
+
+
+    </section>
+
+    <!-- ===================== EXPERIENCIA ===================== -->
+    <section class="card reveal">
+      <h2 class="sec-title">Experiencia laboral</h2><br>
+      <div class="timeline">
+        <article class="job">
+          <h3>Desarrollador Web Full Stack <span style="color:var(--accent)">· Reglado Consultores</span></h3>
+          <p class="meta">Prácticas · Madrid · 2026</p>
+          <ul>
+            <li>Desarrollo de <strong>portales corporativos</strong> (Reglado Consultores, Energy, Maps) con Vue 3, Vue
+              Router y Vite.</li>
+            <li><strong>Panel/CRM inmobiliario</strong> con gestión de propiedades, mapas interactivos (Leaflet) y
+              estado con Pinia.</li>
+            <li><strong>Chatbot con IA</strong> integrando el SDK de Anthropic (Claude), backend en Node.js/Express y
+              canales de Telegram y Notion.</li>
+            <li><strong>Visualización de datos y mapas</strong> con D3.js y TopoJSON; animaciones e interacción con
+              GSAP, Motion y Three.js.</li>
+            <li><strong>Servidor de autenticación OAuth2/OIDC</strong> en PHP (JWT, PSR-7) y APIs REST sobre MySQL.</li>
+            <li><strong>Creación y mantenimiento de bases de datos</strong> (MySQL con phpMyAdmin), <em>debugging</em> y
+              <em>testing</em> de las aplicaciones.
+            </li>
+            <li><strong>Automatización</strong> de flujos y procesos con n8n.</li>
+            <li><strong>Despliegues</strong> en Linux, Docker y Hostinger (FTP).</li>
+            <li><strong>Soporte técnico</strong> de hardware y software a los trabajadores de la empresa. Creación de
+              Scripts.</li>
+            <li><strong>Instalación y mantenimiento de infraestructura de red</strong>: router, switch y NAS.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Vue 3</span><span class="tag">React</span><span class="tag">Next.js</span>
+            <span class="tag">PHP</span><span class="tag">Node.js</span><span class="tag">MySQL</span>
+            <span class="tag">Three.js</span><span class="tag">D3.js</span><span class="tag">Docker</span>
+            <span class="tag">IA</span><span class="tag">n8n</span><span class="tag">Linux</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </article><br>
+
+        <article class="job">
+          <h3>Desarrollador Web &amp; Apps Móviles <span style="color:var(--accent)">· Freelance</span></h3>
+          <p class="meta">Proyectos para clientes · Actualidad</p>
+          <ul>
+            <li>Desarrollo de <strong>multitud de proyectos a medida</strong> para empresas y particulares.</li>
+            <li><strong>Portales web completos</strong>, aplicaciones web y <strong>tiendas online</strong>
+              (e-commerce).</li>
+            <li><strong>Juegos interactivos</strong> para campañas de marketing y marcas personales.</li>
+            <li><strong>Aplicaciones móviles</strong> con Flutter, Android y Android Studio: <strong>fichaje</strong>
+              (control horario) y <strong>citas</strong>.</li>
+            <li><strong>Bots de respuesta automática en WhatsApp</strong>.</li>
+            <li>Empaquetado de aplicaciones en <strong>APK</strong> y publicación en <strong>Google Play</strong> y
+              <strong>App Store</strong> (iOS).
+            </li>
+            <li>Gestión integral del proyecto: diseño, desarrollo, despliegue y mantenimiento.</li>
+            <li>Creación, edición y automatización de contenido con imágenes y vídeos para RRSS</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Flutter</span><span class="tag">Android</span><span class="tag">Android Studio</span>
+            <span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">WordPress</span>
+            <span class="tag">E-commerce</span><span class="tag">WhatsApp API</span>
+          </div>
+        </article><br>
+
+        <article class="job minor">
+          <h3>Vigilante de seguridad <span style="color:var(--ink-soft)">· Comunidad de Madrid</span></h3>
+          <p class="meta">2018 – 2026</p>
+          <p style="margin:0;color:var(--ink-soft);">Control de accesos, vigilancia y custodia de activos, atención al
+            público y resolución de incidencias.</p>
+        </article><br>
+
+        <article class="job minor">
+          <h3>Administrador de empresa <span style="color:var(--ink-soft)">· Mecánicas Trébol S.L.</span></h3>
+          <p class="meta">Gestión y administración</p>
+          <p style="margin:0;color:var(--ink-soft);">Planificación, administración y contabilidad, atención al cliente,
+            presupuestos y control de empleados.</p>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ===================== HABILIDADES ===================== -->
+    <section class="card reveal">
+      <h2 class="sec-title">Habilidades &amp; Tecnologías</h2><br>
+      <div class="skills">
+        <div class="skill-group">
+          <h4>Lenguajes</h4>
+          <div class="tags">
+            <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">PHP</span>
+            <span class="tag">Java</span><span class="tag">Python</span><span class="tag">SQL</span>
+            <span class="tag">HTML</span><span class="tag">CSS</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Frontend</h4>
+          <div class="tags">
+            <span class="tag">Vue 3</span><span class="tag">React</span><span class="tag">Next.js</span>
+            <span class="tag">Vue Router</span><span class="tag">Pinia</span><span class="tag">Vuex</span>
+            <span class="tag">Vue I18n</span><span class="tag">Tailwind</span><span class="tag">Bootstrap</span><span
+              class="tag">jQuery</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Backend</h4>
+          <div class="tags">
+            <span class="tag">PHP (OAuth2/OIDC · JWT)</span><span class="tag">Node.js</span><span
+              class="tag">Express</span>
+            <span class="tag">APIs REST</span><span class="tag">PHPMailer</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Animación &amp; Visual</h4>
+          <div class="tags">
+            <span class="tag">GSAP</span><span class="tag">Motion</span><span class="tag">Lenis</span>
+            <span class="tag">Three.js</span><span class="tag">D3.js</span><span class="tag">Chart.js</span><span
+              class="tag">Leaflet</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Aplicaciones Móvil</h4>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Android</span><span class="tag">Android
+              Studio</span></div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Bases de datos</h4>
+          <div class="tags"><span class="tag">MySQL</span><span class="tag">phpMyAdmin</span><span
+              class="tag">SQLite</span><span class="tag">Supabase</span><span class="tag">Firebase</span></div>
+        </div>
+        <div class="skill-group">
+          <h4>DevOps &amp; Infraestructura</h4>
+          <div class="tags">
+            <span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">WireGuard VPN</span>
+            <span class="tag">Git / GitHub</span><span class="tag">Vite</span><span class="tag">FTP / Hostinger</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>IA &amp; Automatización</h4>
+          <div class="tags">
+            <span class="tag">Anthropic/Claude (Design, Cowork, Code, Skills)</span><span
+              class="tag">OpenAI/Codex</span><span class="tag">n8n</span><span class="tag">Telegram Bot API</span>
+            <span class="tag">Notion API</span><span class="tag">Google APIs</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Otros</h4>
+          <div class="tags"><span class="tag">WordPress</span><span class="tag">SEO</span><span class="tag">Computación
+              en la nube</span><span class="tag">Edición de imagen y vídeo (RRSS)</span><span class="tag">IA generativa
+              de contenido</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FORMACIÓN + IDIOMAS ===================== -->
+    <section class="cols reveal">
+      <div class="card">
+        <h2 class="sec-title">Formación</h2>
+        <div class="edu-item">
+          <h4>Técnico Superior en Desarrollo de Aplicaciones Web</h4>
+          <span>IES Virgen de la Paz · 2025</span>
+        </div>
+        <div class="edu-item">
+          <h4>Bachillerato (Ciencias y Tecnología)</h4>
+          <span>IES Calderón de la Barca · 2020</span>
+        </div>
+        <div class="edu-item">
+          <h4>Curso de Inteligencia Artificial</h4>
+          <span>Udemy</span>
+        </div>
+        <div class="edu-item">
+          <h4>WordPress</h4>
+          <span>Cursos Femxa</span>
+        </div>
+        <div class="edu-item">
+          <h4>Formación en SEO</h4>
+          <span>Posicionamiento web</span>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <h2 class="sec-title">Idiomas</h2>
+        <div class="lang">
+          <div class="row"><span>Inglés</span><span>Medio · A2–B1</span></div>
+          <div class="bar"><i style="width:60%"></i></div>
+        </div>
+        <div class="lang">
+          <div class="row"><span>Francés</span><span>Básico · A1</span></div>
+          <div class="bar"><i style="width:30%"></i></div>
+        </div>
+
+        <h2 class="sec-title" style="margin-top:24px;">Aptitudes</h2>
+        <ul class="aptitudes">
+          <li>Actitud profesional y responsable.</li>
+          <li>Iniciativa y afán de superación.</li>
+          <li>Predisposición al aprendizaje.</li>
+          <li>Perfil versátil y trabajo en equipo.</li>
+          <li>Capacidad para trabajar bajo presión.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== PROYECTOS ===================== -->
+    <section class="card reveal">
+      <h2 class="sec-title">Proyectos destacados</h2><br>
+      <div class="grid">
+        <div class="project">
+          <h4>Chatbot IA · Regladín</h4>
+          <p>Asistente conversacional con IA: agenda citas con sincronización a
+            Google Calendar, gestiona subida de archivos y deriva a agente humano en directo vía Telegram, con avisos
+            por email y persistencia en base de datos.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span
+              class="tag">MySQL</span><span class="tag">Telegram</span><span class="tag">Google Calendar</span></div>
+        </div>
+        <div class="project">
+          <h4>My Trébol · App de fichajes</h4>
+          <p>App móvil multiplataforma (Android/iOS) de control horario con geolocalización GPS, roles de usuario, panel
+            de administración y exportación de informes (PDF/Excel) por Email y WhatsApp.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Firebase Firestore</span><span
+              class="tag">Firebase Auth</span><span class="tag">Geolocator (GPS)</span></div>
+        </div>
+
+        <div class="project">
+          <h4>Flor Canela</h4>
+          <p>Tienda online (e-commerce) con catálogo, carrito, autenticación de usuarios (Google) y pagos seguros.</p>
+          <div class="tags"><span class="tag">Vue 3</span><span class="tag">E-commerce</span><span
+              class="tag">Stripe</span><span class="tag">Google Auth</span><span class="tag">Supabase</span></div>
+        </div>
+
+
+        <div class="project">
+          <h4>Inmobiliaria Reglados</h4>
+          <p>Panel inmobiliario con mapas, filtros y gestión de propiedades.</p>
+          <div class="tags"><span class="tag">Vue 3</span><span class="tag">Pinia</span><span
+              class="tag">Leaflet</span><span class="tag">Axios</span></div>
+        </div>
+        <div class="project">
+          <h4>Buscador de Subvenciones</h4>
+          <p>Plataforma con scraping automatizado y base de datos de ayudas y plazos.</p>
+          <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span
+              class="tag">Tailwind</span><span class="tag">SQLite</span></div>
+        </div>
+        <div class="project">
+          <h4>RegladoCA</h4>
+          <p>Web corporativa del despacho de consultores con servicio de autenticación propio.</p>
+          <div class="tags"><span class="tag">Vue 3</span><span class="tag">Vite</span><span class="tag">PHP</span><span
+              class="tag">OAuth2</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      Borja González Arazo · Desarrollador Web Full Stack ·
+      <a href="https://www.borjacode.com" target="_blank" rel="noopener">borjacode.com</a>
+    </footer>
+
+  </main>
+
+  <script>
+    /* =====================================================================
+       Animación de entrada (IntersectionObserver)
+       ===================================================================== */
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: .12 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+
+    /* =====================================================================
+       Fondo interactivo: ONDAS DE AGUA (WebGL)
+       - Ripple que se propaga al hacer click / tocar / arrastrar.
+       - Sobre fondo claro, sutil y elegante.
+       - Fallback: si no hay WebGL o el usuario prefiere menos movimiento,
+         se deja el gradiente estático del <body>.
+       ===================================================================== */
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var canvas = document.getElementById('water');
+      if (reduce) { canvas.style.display = 'none'; return; }
+
+      var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) { canvas.style.display = 'none'; return; }   // fallback al gradiente del body
+
+      var MAX_DROPS = 16;
+      var drops = [];           // cada drop: {x, y, t}  (x,y normalizados 0..1, y arriba=1)
+
+      var vsSource = [
+        'attribute vec2 a_pos;',
+        'void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }'
+      ].join('\n');
+
+      var fsSource = [
+        'precision highp float;',
+        'uniform vec2  u_res;',
+        'uniform float u_time;',
+        'uniform int   u_count;',
+        'uniform vec3  u_drops[' + MAX_DROPS + '];',   // x, y, startTime
+        '',
+        '// Altura de la onda en un punto p (coords con aspecto corregido)',
+        'float waveHeight(vec2 p){',
+        '  float h = 0.0;',
+        '  for(int i=0;i<' + MAX_DROPS + ';i++){',
+        '    if(i>=u_count) break;',
+        '    vec3 d = u_drops[i];',
+        '    float age = u_time - d.z;',
+        '    if(age < 0.0) continue;',
+        '    vec2 c = d.xy;',
+        '    vec2 rel = p - c;',
+        '    float ang = atan(rel.y, rel.x);',
+        '    float seed = d.z;',            // semilla distinta por gota (su tiempo de inicio)
+        '    // deformación angular -> la onda NO es un círculo perfecto, es orgánica',
+        '    float wob = 0.018*sin(ang*3.0 + seed*6.3) + 0.011*sin(ang*5.0 - seed*2.7) + 0.007*sin(ang*8.0 + seed*1.7);',
+        '    float dist = length(rel) + wob;',
+        '    float speed = 0.55;',           // velocidad de expansión del frente
+        '    float radius = age * speed;',
+        '    // onda amortiguada que sólo existe tras pasar el frente',
+        '    float front = smoothstep(0.0, 0.06, radius - dist);',
+        '    float ripple = sin(dist*42.0 - age*9.0);',
+        '    float decayT = exp(-age*1.1);',         // se apaga con el tiempo
+        '    float decayD = exp(-dist*3.0);',        // más débil lejos del centro
+        '    h += ripple * front * decayT * decayD;',
+        '  }',
+        '  return h;',
+        '}',
+        '',
+        'void main(){',
+        '  vec2 uv = gl_FragCoord.xy / u_res;',
+        '  float aspect = u_res.x / u_res.y;',
+        '  vec2 p = vec2(uv.x*aspect, uv.y);',
+        '',
+        '  float e = 1.5 / u_res.y;',
+        '  float h  = waveHeight(p);',
+        '  float hx = waveHeight(p + vec2(e,0.0));',
+        '  float hy = waveHeight(p + vec2(0.0,e));',
+        '  vec2 grad = vec2(hx - h, hy - h);',
+        '',
+        '  // Fondo claro base (gradiente suave) ligeramente distorsionado',
+        '  vec2 duv = uv + grad * 0.9;',
+        '  vec3 top = vec3(0.835, 0.890, 0.960);',   // azul claro #d5e3f5
+        '  vec3 bot = vec3(0.706, 0.804, 0.918);',   // azul medio #b4cdea
+        '  vec3 col = mix(bot, top, clamp(duv.y,0.0,1.0));',
+        '',
+        '  // Tinte de acento (teal) en las crestas + brillos tipo cáustica',
+        '  vec3 accent = vec3(0.055, 0.561, 0.620);',
+        '  col = mix(col, accent, clamp(h*0.18, 0.0, 0.22));',
+        '  float spec = pow(max(0.0, 1.0 - length(grad)*60.0), 8.0);',
+        '  col += vec3(spec) * 0.05;',
+        '  col += length(grad) * 1.4;',              // realce sutil en las pendientes',
+        '',
+        '  gl_FragColor = vec4(col, 1.0);',
+        '}'
+      ].join('\n');
+
+      function compile(type, src) {
+        var s = gl.createShader(type);
+        gl.shaderSource(s, src); gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.warn('Shader error:', gl.getShaderInfoLog(s)); return null;
+        }
+        return s;
+      }
+
+      var vs = compile(gl.VERTEX_SHADER, vsSource);
+      var fs = compile(gl.FRAGMENT_SHADER, fsSource);
+      if (!vs || !fs) { canvas.style.display = 'none'; return; }
+
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { canvas.style.display = 'none'; return; }
+      gl.useProgram(prog);
+
+      // Quad a pantalla completa
+      var buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      var aPos = gl.getAttribLocation(prog, 'a_pos');
+      gl.enableVertexAttribArray(aPos);
+      gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+      var uRes = gl.getUniformLocation(prog, 'u_res');
+      var uTime = gl.getUniformLocation(prog, 'u_time');
+      var uCount = gl.getUniformLocation(prog, 'u_count');
+      var uDrops = gl.getUniformLocation(prog, 'u_drops');
+
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);  // límite por rendimiento
+      function resize() {
+        var w = Math.floor(canvas.clientWidth * dpr);
+        var h = Math.floor(canvas.clientHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w; canvas.height = h;
+          gl.viewport(0, 0, w, h);
+        }
+      }
+      window.addEventListener('resize', resize);
+
+      var start = performance.now();
+      function now() { return (performance.now() - start) / 1000; }
+
+      function addDrop(clientX, clientY) {
+        var r = canvas.getBoundingClientRect();
+        var x = (clientX - r.left) / r.width;
+        var y = 1.0 - (clientY - r.top) / r.height;   // y hacia arriba
+        var aspect = canvas.clientWidth / canvas.clientHeight;
+        drops.push({ x: x * aspect, y: y, t: now() });
+        if (drops.length > MAX_DROPS) drops.shift();
+      }
+
+      // Interacción puntero + táctil
+      var dragging = false;
+      canvas.addEventListener('pointerdown', function (e) { dragging = true; addDrop(e.clientX, e.clientY); });
+      window.addEventListener('pointerup', function () { dragging = false; });
+      var lastMove = 0;
+      window.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var t = performance.now();
+        if (t - lastMove < 60) return;  // throttle para no saturar de gotas
+        lastMove = t;
+        addDrop(e.clientX, e.clientY);
+      });
+      // También permitir un ripple al hacer click en cualquier parte de la página
+      document.addEventListener('click', function (e) { addDrop(e.clientX, e.clientY); });
+
+      // Gotas automáticas ocasionales para dar vida
+      var nextAuto = 1.0;
+      function maybeAuto(t) {
+        if (t > nextAuto) {
+          var aspect = canvas.clientWidth / canvas.clientHeight;
+          var cx = Math.random() * aspect, cy = Math.random();
+          // racimo de 2-3 gotas escalonadas y desplazadas -> forma irregular,
+          // como el rastro al arrastrar el puntero (no un círculo perfecto)
+          var n = 2 + Math.floor(Math.random() * 2);
+          for (var k = 0; k < n; k++) {
+            drops.push({
+              x: cx + (Math.random() - 0.5) * 0.07 * aspect,
+              y: cy + (Math.random() - 0.5) * 0.07,
+              t: t + k * 0.07
+            });
+          }
+          while (drops.length > MAX_DROPS) drops.shift();
+          nextAuto = t + 2.5 + Math.random() * 2.5;
+        }
+      }
+
+      var paused = false;
+      document.addEventListener('visibilitychange', function () { paused = document.hidden; });
+
+      function render() {
+        if (!paused) {
+          resize();
+          var t = now();
+          maybeAuto(t);
+
+          // limpia gotas muy antiguas (ya apagadas)
+          while (drops.length && (t - drops[0].t) > 6) drops.shift();
+
+          var flat = new Float32Array(MAX_DROPS * 3);
+          for (var i = 0; i < drops.length && i < MAX_DROPS; i++) {
+            flat[i * 3] = drops[i].x;
+            flat[i * 3 + 1] = drops[i].y;
+            flat[i * 3 + 2] = drops[i].t;
+          }
+          gl.uniform2f(uRes, canvas.width, canvas.height);
+          gl.uniform1f(uTime, t);
+          gl.uniform1i(uCount, Math.min(drops.length, MAX_DROPS));
+          gl.uniform3fv(uDrops, flat);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        }
+        requestAnimationFrame(render);
+      }
+      resize();
+      render();
+    })();
+  </script>
+</body>
+
+</html>
